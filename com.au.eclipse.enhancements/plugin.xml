@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="com.au.sortfeature.handler.SortFeatureHandler"
+            description="Sorts the &apos;required&apos; and &apos;plugin&apos; sections of feature.xml files, alphabetically."
+            id="com.au.sortfeature.sortfeature"
+            name="Sort feature.xml file">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="com.au.sortfeature.handler.SortFeatureHandler"
+            commandId="com.au.sortfeature.sortfeature">
+         <enabledWhen>
+            <reference
+                  definitionId="com.au.sortfeature.featureInSelection">
+            </reference>
+         </enabledWhen>
+         <activeWhen>
+            <reference
+                  definitionId="com.au.sortfeature.featureInSelection">
+            </reference>
+         </activeWhen>
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <command
+               commandId="com.au.sortfeature.sortfeature"
+               label="Sort feature"
+               mnemonic="x"
+               style="push"
+               tooltip="Sort the feature.xml file alphabetically">
+            <visibleWhen
+                  checkEnabled="false">
+               <reference
+                     definitionId="com.au.sortfeature.featureInSelection">
+               </reference>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.core.expressions.definitions">
+      <definition
+            id="com.au.sortfeature.featureInSelection">
+         <with
+               variable="selection">
+            <iterate
+                  ifEmpty="false"
+                  operator="or">
+               <instanceof
+                     value="org.eclipse.core.resources.IResource">
+               </instanceof>
+               <test
+                     property="org.eclipse.core.resources.projectNature"
+                     value="org.eclipse.pde.FeatureNature">
+               </test>
+            </iterate>
+         </with>
+      </definition>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="com.au.sortfeature.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="org.eclipse.pde.ui.MainPreferencePage"
+            class="com.au.sortfeature.preferences.SortFeaturePreferencePage"
+            id="com.au.sortfeature.preferences.SortFeaturePreferencePage"
+            name="Sort Feature Preferences">
+      </page>
+   </extension>
+
+</plugin>

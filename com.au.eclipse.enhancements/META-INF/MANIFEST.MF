@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Sortfeature
+Bundle-SymbolicName: com.au.eclipse.enhancements;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.au.sortfeature.Activator
+Bundle-Vendor: AU
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources;bundle-version="3.7.100",
+ org.eclipse.core.expressions;bundle-version="3.4.300",
+ org.apache.commons.lang;bundle-version="2.4.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ActivationPolicy: lazy
